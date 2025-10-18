@@ -13,6 +13,20 @@ target/
 *.iml
 *.ipr
 
+
+# User-specific stuff
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf/
+.idea/dictionaries/
+.idea/tasks.xml
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.ids
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
 ### Eclipse ###
 .apt_generated
 .classpath
