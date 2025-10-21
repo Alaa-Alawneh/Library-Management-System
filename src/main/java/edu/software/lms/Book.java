@@ -12,7 +12,7 @@ public class Book {
         this.author = author;
         this.isbn = isbn;
     }
-
+    //todo: Equals method
     public int getId() {
         return id;
     }
