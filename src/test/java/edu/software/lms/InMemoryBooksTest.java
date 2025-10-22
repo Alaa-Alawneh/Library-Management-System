@@ -68,11 +68,6 @@ class InMemoryBooksTest {
         boolean adding_result = inMemoryBooks.addBook(book2);
         assertFalse(adding_result);
     }
-    void addAuthorSimilarBook() {
-        Book book2 = new Book(2,"Data Structure","Arthur Morgan","314");
-        boolean adding_result = inMemoryBooks.addBook(book2);
-        assertFalse(adding_result);
-    }
     @Test
     void addNewBook() {
         Book book2 = new Book(2,"Data Structure","John Marston","314");
@@ -97,5 +92,9 @@ class InMemoryBooksTest {
         Book book = inMemoryBooks.getBookByISBN("314");
         assertNull(book);
     }
-
+    @Test
+    void failToGetBookById() {
+        Book book = inMemoryBooks.getBookById(2);
+        assertNull(book);
+    }
 }
