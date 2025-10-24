@@ -58,9 +58,11 @@ class InMemoryUserRepositoryTest {
         User u = new User("dave", "mysecret");
         u.setId("d-id");
         repo.addUser(u);
-
-        assertTrue(repo.validateCredentials("dave", "mysecret"));
-        assertFalse(repo.validateCredentials("dave", "wrong"));
-        assertFalse(repo.validateCredentials("noone", "pass"));
+        assertEquals(new Pair<>(null,LoginResult.INVALID_USERNAME),repo.validateCredentials(null,"mysecret"));
+        assertEquals(new Pair<>(null,LoginResult.INVALID_PASSWORD),repo.validateCredentials("dave",null));
+        assertEquals(new Pair<>(null,LoginResult.NO_USER_FOUND),repo.validateCredentials("none","123"));
+        assertEquals(new Pair<>(u, LoginResult.USER_FOUND_SUCCESSFULLY),repo.validateCredentials("dave","mysecret"));
+        assertEquals(new Pair<>(null,LoginResult.USER_FOUND_WRONG_PASSWORD),repo.validateCredentials("dave","123"));
+        ;
     }
 }

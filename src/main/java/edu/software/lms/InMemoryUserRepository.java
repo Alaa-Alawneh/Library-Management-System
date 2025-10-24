@@ -59,10 +59,16 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public boolean validateCredentials(String username, String password) {
-        if (username == null || password == null) return false;
-        return users.stream()
-                .filter(u -> username.equals(u.getUsername()))
-                .anyMatch(u -> u.checkPassword(password));
+    public Pair<User,LoginResult> validateCredentials(String username, String password) {
+        if (username == null) return new Pair<>(null, LoginResult.INVALID_USERNAME);
+        if (password == null) return new Pair<>(null, LoginResult.INVALID_PASSWORD);
+        User user = users.stream()
+                .filter(u -> username.equals(u.getUsername())).findFirst().orElse(null);
+        if (user == null) return new Pair<>(null, LoginResult.NO_USER_FOUND);
+        if(user.checkPassword(password))
+            return new Pair<>(user,LoginResult.USER_FOUND_SUCCESSFULLY);
+        return new Pair<>(null,LoginResult.USER_FOUND_WRONG_PASSWORD);
+
+
     }
 }

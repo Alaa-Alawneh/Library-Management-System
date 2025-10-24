@@ -9,5 +9,5 @@ public interface UserRepository {
     /**
      * Validate credentials: returns true if username exists and password matches.
      */
-    boolean validateCredentials(String username, String password);
+    Pair<User,LoginResult> validateCredentials(String username, String password);
 }

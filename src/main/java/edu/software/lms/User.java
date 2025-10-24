@@ -1,5 +1,7 @@
 package edu.software.lms;
 
+import java.util.Objects;
+
 public class User {
     private String username;
     private  String password;
@@ -38,7 +40,19 @@ public boolean checkPassword(String password) {
         return "User{id='" + id + "', username='" + username + "'}";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
 
+        User user = (User) o;
+        return Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getId(), user.getId());
+    }
 
-
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(getUsername());
+        result = 31 * result + Objects.hashCode(getPassword());
+        result = 31 * result + Objects.hashCode(getId());
+        return result;
+    }
 }
