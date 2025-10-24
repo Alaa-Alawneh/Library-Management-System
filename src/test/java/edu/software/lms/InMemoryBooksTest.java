@@ -20,14 +20,13 @@ class InMemoryBooksTest {
     @AfterEach
     void tearDown() {
         inMemoryBooks = null;
+        testBooK = null;
     }
 
     @Test
     void getBookById() {
         Book book = inMemoryBooks.getBookById(1);
         assertNotNull(book);
-
-
 
     }
 
@@ -47,6 +46,7 @@ class InMemoryBooksTest {
     @Test
     void getBookByISBN() {
         Book book = inMemoryBooks.getBookByISBN("123");
+        assertNotNull(book);
     }
 
     @Test
@@ -58,20 +58,43 @@ class InMemoryBooksTest {
     }
     @Test
     void addIdSimilarBook() {
-        Book book2 = new Book(1,"OOP","Arthur Morgan","123123");
+        Book book2 = new Book(1,"Data Structure","John Marston","314");
         boolean adding_result = inMemoryBooks.addBook(book2);
         assertFalse(adding_result);
     }
     @Test
     void addISBNSimilarBook() {
-        Book book2 = new Book(2,"OOP","Arthur Morgan","123");
+        Book book2 = new Book(2,"Data Structure","John Marston","123");
         boolean adding_result = inMemoryBooks.addBook(book2);
         assertFalse(adding_result);
     }
     @Test
     void addNewBook() {
-        Book book2 = new Book(2,"Software","Ali","1234");
+        Book book2 = new Book(2,"Data Structure","John Marston","314");
         boolean adding_result = inMemoryBooks.addBook(book2);
         assertTrue(adding_result);
+    }
+    @Test
+    void failToGetBookByName() {
+        Book book = inMemoryBooks.getBookByName("Data Structure");
+        assertNull(book);
+
+    }
+
+    @Test
+    void failToGetBookByAuthor() {
+        Book book = inMemoryBooks.getBookByAuthor("John Marston");
+        assertNull(book);
+    }
+
+    @Test
+    void failToGetBookByISBN() {
+        Book book = inMemoryBooks.getBookByISBN("314");
+        assertNull(book);
+    }
+    @Test
+    void failToGetBookById() {
+        Book book = inMemoryBooks.getBookById(2);
+        assertNull(book);
     }
 }

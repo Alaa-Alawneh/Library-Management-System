@@ -13,6 +13,14 @@ public class Book {
         this.isbn = isbn;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+        return getId() == book.getId() && getName().equals(book.getName()) && getAuthor().equals(book.getAuthor()) && getIsbn().equals(book.getIsbn());
+    }
+
     public int getId() {
         return id;
     }
